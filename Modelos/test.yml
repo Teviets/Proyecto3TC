@@ -1,12 +1,12 @@
 q_states:
   states: 
-    - q0   # Estado inicial
-    - q1   # Buscar un 'b' para balancear un 'a'
-    - q2   # Buscar un 'a' para balancear un 'b'
-    - q3   # Ignorar los 'c'
-    - q4   # Comprobar si todo está procesado
-    - qa   # Estado de aceptación
-    - qr   # Estado de rechazo
+    - q0  
+    - q1   
+    - q2  
+    - q3   
+    - q4   
+    - qa   
+    - qr   
   initial_state: q0
   final_states: [qa]
   reject_state: qr
@@ -15,7 +15,7 @@ alphabet:
   - a
   - b
   - c
-  - B  # B representa "blank" (espacio vacío en la cinta)
+  - B  # B representa "blank" 
 
 tape_alphabet:
   - a
