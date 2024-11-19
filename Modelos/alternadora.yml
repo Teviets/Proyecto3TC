@@ -1,0 +1,169 @@
+q_states:
+  states: 
+    - q0   # Estado inicial
+    - q1   # Buscar un 'b' para balancear un 'a' transformado
+    - q2   # Buscar un 'a' para balancear un 'b' transformado
+    - q3   # Ignorar los 'c'
+    - q4   # Comprobar si todo está procesado
+    - qa   # Estado de aceptación
+    - qr   # Estado de rechazo
+  initial_state: q0
+  final_states: [qa]
+  reject_state: qr
+
+alphabet: 
+  - a
+  - b
+  - c
+  - B  # B representa "blank" (espacio vacío en la cinta)
+
+tape_alphabet:
+  - a
+  - b
+  - c
+  - B
+
+delta:
+  # Transiciones desde el estado inicial (q0)
+  - params:
+      initial_state: q0
+      tape_input: a
+    output:
+      final_state: q1  # Transformar 'a' en 'b' y buscar un 'b' correspondiente
+      tape_output: b
+      move: R
+  - params:
+      initial_state: q0
+      tape_input: b
+    output:
+      final_state: q2  # Transformar 'b' en 'a' y buscar un 'a' correspondiente
+      tape_output: a
+      move: R
+  - params:
+      initial_state: q0
+      tape_input: c
+    output:
+      final_state: q3  # Ignorar 'c'
+      tape_output: c
+      move: R
+  - params:
+      initial_state: q0
+      tape_input: B
+    output:
+      final_state: q4  # Comprobar si todo está procesado
+      tape_output: B
+      move: S
+
+  # Procesar 'b' después de un 'a' transformado en q1
+  - params:
+      initial_state: q1
+      tape_input: b
+    output:
+      final_state: q0  # Volver al estado inicial después de balancear
+      tape_output: B
+      move: R
+  - params:
+      initial_state: q1
+      tape_input: c
+    output:
+      final_state: q3  # Ignorar 'c'
+      tape_output: c
+      move: R
+  - params:
+      initial_state: q1
+      tape_input: B
+    output:
+      final_state: qr  # Rechazar si no hay un 'b' para balancear
+      tape_output: B
+      move: S
+
+  # Procesar 'a' después de un 'b' transformado en q2
+  - params:
+      initial_state: q2
+      tape_input: a
+    output:
+      final_state: q0  # Volver al estado inicial después de balancear
+      tape_output: B
+      move: R
+  - params:
+      initial_state: q2
+      tape_input: c
+    output:
+      final_state: q3  # Ignorar 'c'
+      tape_output: c
+      move: R
+  - params:
+      initial_state: q2
+      tape_input: B
+    output:
+      final_state: qr  # Rechazar si no hay un 'a' para balancear
+      tape_output: B
+      move: S
+
+  # Ignorar 'c' en q3
+  - params:
+      initial_state: q3
+      tape_input: a
+    output:
+      final_state: q1  # Volver a buscar un 'b'
+      tape_output: a
+      move: R
+  - params:
+      initial_state: q3
+      tape_input: b
+    output:
+      final_state: q2  # Volver a buscar un 'a'
+      tape_output: b
+      move: R
+  - params:
+      initial_state: q3
+      tape_input: c
+    output:
+      final_state: q3  # Continuar ignorando
+      tape_output: c
+      move: R
+  - params:
+      initial_state: q3
+      tape_input: B
+    output:
+      final_state: q4  # Verificar si todo está procesado
+      tape_output: B
+      move: S
+
+  # Comprobar si todo está procesado en q4
+  - params:
+      initial_state: q4
+      tape_input: B
+    output:
+      final_state: qa  # Aceptar si todo está procesado
+      tape_output: B
+      move: S
+  - params:
+      initial_state: q4
+      tape_input: a
+    output:
+      final_state: qr  # Rechazar si quedan 'a'
+      tape_output: B
+      move: S
+  - params:
+      initial_state: q4
+      tape_input: b
+    output:
+      final_state: qr  # Rechazar si quedan 'b'
+      tape_output: B
+      move: S
+  - params:
+      initial_state: q4
+      tape_input: c
+    output:
+      final_state: qr  # Rechazar si quedan 'c'
+      tape_output: B
+      move: S
+
+simulation_strings:
+  # Cadenas aceptadas
+  - abcabc
+  - baabcc
+  # Cadenas rechazadas
+  - aaabb
+  - abbbcc
