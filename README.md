@@ -89,7 +89,7 @@ simulation_strings: ["01", "11", "00"]
 
 ### Ejecución del programa
 ```bash
-python main.py
+python3 Modelos/TM.py
 ```
 
 ### Flujo del programa
