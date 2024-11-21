@@ -33,21 +33,6 @@ pip install pyyaml graphviz
 ### Requisitos adicionales
 Para que `graphviz` funcione correctamente, debes instalar la herramienta Graphviz en tu sistema. Consulta la documentación oficial para instrucciones específicas de tu sistema operativo: [Graphviz](https://graphviz.org/download/).
 
----
-
-## Estructura del Proyecto
-
-```
-├── main.py                  # Archivo principal
-├── alternadora.yml          # Configuración de la máquina alteradora
-├── test.yml                 # Configuración de la máquina reconocedora
-├── historial.txt            # Salida del historial de simulaciones
-├── graphs/                  # Carpeta donde se almacenan los grafos generados
-│   └── maquina_turing.png   # Grafo generado de la máquina de Turing
-```
-
----
-
 ## Configuración
 
 El archivo YAML define las características de la máquina de Turing. Ejemplo:
