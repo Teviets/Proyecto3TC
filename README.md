@@ -131,10 +131,6 @@ q1        1         qA                   B                     R
 
 ## Contribuciones
 
-Si deseas contribuir al proyecto, envía un pull request o reporta problemas en el repositorio asociado.
+Diego Valdez
+Sebastian Estrada
 
----
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT.
